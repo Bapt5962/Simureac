@@ -382,7 +382,7 @@
   </action>
   <action name="actionDonnations">
    <property name="text">
-    <string>Donnations</string>
+    <string>Donations</string>
    </property>
   </action>
  </widget>
