@@ -2,6 +2,8 @@
 #define DIALOGAPROPOS_H
 
 #include <QDialog>
+#include <QDesktopServices>
+#include <QUrl>
 
 namespace Ui {
 class DialogAPropos;
@@ -17,6 +19,7 @@ public:
 
 public slots:
     void on_Fermer_clicked();
+    void on_Qt_clicked();
 
 signals:
     void dialogQuit(int);
