@@ -46,27 +46,7 @@ MainWindow::MainWindow(QWidget *parent)
     statusBar()->addPermanentWidget(messageStatusBar);
     messageStatusBar->show();
 
-    //Changez pas ça svp
-    bool logoModif(true);
-    QFile f("data/assets/logo.png");
-    if (f.open(QFile::ReadOnly)) {
-        QCryptographicHash hash(QCryptographicHash::Md5);
-        if (hash.addData(&f)) {
-            if(hash.result() == "\xF9\xB8\xB9\x92\xD0\x86\xED\x8Et\xF9\xDC\x85\x02#\x9D'")
-            {
-                logoModif = false;
-            }
-        }
-    }
-    if(logoModif)
-    {
-        ui->Logo->setText(":(");
-    }
-    else
-    {
-        ui->Logo->setPixmap(QPixmap("data/assets/logo.png"));
-    }
-    //Svp
+    ui->Logo->setPixmap(QPixmap("data/assets/logo.png"));
 
     setAttribute(Qt::WA_DeleteOnClose);
 
