@@ -136,16 +136,8 @@ void DialogSauvegardeSimulation::on_Sauvegarder_clicked()
         sauvegardeReactions.append(QString::number(general->getReaction(r)->getFacteurPreExp()));
         sauvegardeReactions.append(QString::number(general->getReaction(r)->getEnergieActivation()));
         sauvegardeReactions.append(QString::number(general->getReaction(r)->getDeltaTemperature()));
-        sauvegardeReactions.append(QString::number(general->getReaction(r)->getPHCentre()));
-        sauvegardeReactions.append(QString::number(general->getReaction(r)->getPHAmplitude()));
-        if(general->getReaction(r)->getVersAcide())
-        {
-            sauvegardeReactions.append("1");
-        }
-        else
-        {
-            sauvegardeReactions.append("0");
-        }
+        sauvegardeReactions.append(QString::number(general->getReaction(r)->getPHA()));
+        sauvegardeReactions.append(QString::number(general->getReaction(r)->getPHB()));
         sauvegardeReactions.append("ENDREACTION");
     }
     FileText sauvegardeSimulation;

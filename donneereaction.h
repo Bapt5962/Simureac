@@ -63,15 +63,14 @@ public:
     void setDeltaTemperature(double value);
     double getTemperatureParReaction(double volume) const;
 
-    double getPH(double pH) const;
-    void setPH(double pHCentreA, double pHAmplitudeA, bool versAcideA);
+    double getPH(double pH);
+    void setPH(double pHAA, double pHBA);
 
     QString formaterEquation();
     QColor formaterCouleurProduits();
 
-    double getPHCentre() const;
-    double getPHAmplitude() const;
-    bool getVersAcide() const;
+    double getPHA() const;
+    double getPHB() const;
 
     QList<int> getReactifsID() const;
     QList<int> getProduitsID() const;
@@ -111,14 +110,13 @@ private:
 
     //pH
 
-    double pHCentre;
-    double pHAmplitude;
-    bool versAcide;
-
-    //Mémoire fonction affine pH
-
     double pHA;
     double pHB;
+
+    //Mémoire pour getPH() afin de limiter l'appel de qExp()
+    double dernierPH;
+    double derniereValeurPourPH;
+
 };
 
 #endif // DONNEEREACTION_H

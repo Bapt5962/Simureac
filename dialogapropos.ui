@@ -30,7 +30,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>La Super Penguin Team est composée de :</string>
+      <string>SimuRéac a été réalisé par la</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -53,7 +53,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Baptiste Duthoit</string>
+      <string>Super Penguin Team</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -69,7 +69,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Et c'est tout.</string>
+      <string>(Composé que d'un seul membre contrairement à ce que dit le nom)</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -110,6 +110,22 @@
     <widget class="QPushButton" name="Qt">
      <property name="text">
       <string/>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_5">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>(Basé sur une version non modifié de Qt 5.14.0)</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </item>

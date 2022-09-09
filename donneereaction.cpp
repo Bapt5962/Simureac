@@ -6,9 +6,11 @@ DonneeReaction::DonneeReaction(int IDa)
     facteurPreExp = 200;
     energieActivation = 0;
     deltaTemperature = 0;
-    setPH(-999, 1, false);
+    setPH(1, -99);
     derniereTemperature = -300;
     derniereValeurPourT = 0;
+    dernierPH = -300;
+    derniereValeurPourPH = 0;
 }
 
 void DonneeReaction::setTout(DonneeReaction change)
@@ -25,7 +27,7 @@ void DonneeReaction::setTout(DonneeReaction change)
     efficaciteCatalyseurs = change.getEfficaciteCatalyseurs();
     catalyseurs = change.getCatalyseurs();
     catalyseursID = change.getCatalyseursID();
-    setPH(change.getPHCentre(), change.getPHAmplitude(), change.getVersAcide());
+    setPH(change.getPHA(), change.getPHB());
 }
 
 int DonneeReaction::getID() const
@@ -206,9 +208,19 @@ double DonneeReaction::getTemperatureParReaction(double volume) const
     return ((deltaTemperature * 1E-6) / 4.18) / volume;
 }
 
-double DonneeReaction::getPH(double pH) const
+double DonneeReaction::getPH(double pH)
 {
-    double calcul(pHA * pH + pHB);
+    if(dernierPH == pH)
+    {
+        return derniereValeurPourPH;
+    }
+    else
+    {
+        dernierPH = pH;
+        derniereValeurPourPH = 1 / (1 + qExp(pHA * (pH + pHB)));
+        return derniereValeurPourPH;
+    }
+    /*double calcul(pHA * pH + pHB);
     if(calcul > 1)
     {
         return 1;
@@ -220,12 +232,14 @@ double DonneeReaction::getPH(double pH) const
     else
     {
         return calcul;
-    }
+    }*/
 }
 
-void DonneeReaction::setPH(double pHCentreA, double pHAmplitudeA, bool versAcideA)
+void DonneeReaction::setPH(double pHAA, double pHBA)
 {
-    pHCentre = pHCentreA;
+    pHA = pHAA;
+    pHB = pHBA;
+    /*pHCentre = pHCentreA;
     pHAmplitude = pHAmplitudeA;
     versAcide = versAcideA;
     if(versAcide)
@@ -237,7 +251,7 @@ void DonneeReaction::setPH(double pHCentreA, double pHAmplitudeA, bool versAcide
     {
         pHA = 1 / (2 * pHAmplitude);
         pHB = -(pHA * (pHCentre - pHAmplitude));
-    }
+    }*/
 }
 
 QString DonneeReaction::formaterEquation()
@@ -336,19 +350,14 @@ QColor DonneeReaction::formaterCouleurProduits()
     return QColor(rouge / produits.size(), vert / produits.size(), bleu / produits.size());
 }
 
-double DonneeReaction::getPHCentre() const
+double DonneeReaction::getPHA() const
 {
-    return pHCentre;
+    return pHA;
 }
 
-double DonneeReaction::getPHAmplitude() const
+double DonneeReaction::getPHB() const
 {
-    return pHAmplitude;
-}
-
-bool DonneeReaction::getVersAcide() const
-{
-    return versAcide;
+    return pHB;
 }
 
 QList<int> DonneeReaction::getReactifsID() const
@@ -374,4 +383,6 @@ void DonneeReaction::oublierLimiteExp()
         derniereTemperatureCatalyse[r] = -300;
         derniereValeurPourTCatalyse[r] = 0;
     }
+    dernierPH = -300;
+    derniereValeurPourPH = 0;
 }

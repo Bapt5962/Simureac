@@ -75,13 +75,12 @@ DialogEditionReaction::DialogEditionReaction(DonneeReaction copieReaction, QList
         ui->Temperature->setChecked(true);
     }
     ui->TemperatureJ->setValue(copie.getDeltaTemperature());
-    if(!(copie.getPHCentre() == -999 && copie.getPHAmplitude() == 1 && !copie.getVersAcide()))
+    if(!(copie.getPHA() == 1 && copie.getPHB() == -99))
     {
         ui->pH->setChecked(true);
     }
-    ui->pHCentre->setValue(copie.getPHCentre());
-    ui->pHAmplitude->setValue(copie.getPHAmplitude());
-    ui->VersAcide->setChecked(copie.getVersAcide());
+    ui->pHA->setValue(copie.getPHA());
+    ui->pHB->setValue(copie.getPHB());
 
     this->setAttribute(Qt::WA_DeleteOnClose);
 
@@ -181,9 +180,8 @@ void DialogEditionReaction::on_pH_clicked()
 {
     if(!ui->pH->isChecked())
     {
-        ui->pHCentre->setValue(-999);
-        ui->pHAmplitude->setValue(1);
-        ui->VersAcide->setChecked(false);
+        ui->pHA->setValue(-1);
+        ui->pHB->setValue(-99);
     }
 }
 
@@ -212,7 +210,7 @@ void DialogEditionReaction::renvoyerDonnees()
         copie.setEnergieActivation(0);
     }
     copie.setDeltaTemperature(ui->TemperatureJ->value());
-    copie.setPH(ui->pHCentre->value(), ui->pHAmplitude->value(), ui->VersAcide->isChecked());
+    copie.setPH(ui->pHA->value(), ui->pHB->value());
     emit sauvegarder(copie);
 }
 

@@ -212,7 +212,7 @@ void DialogChargerSimulation::on_Importer_clicked()
         lectureReaction++;
         importationR.setDeltaTemperature(reactions[r][lectureReaction].toDouble());
         lectureReaction++;
-        importationR.setPH(reactions[r][lectureReaction].toDouble(), reactions[r][lectureReaction + 1].toDouble(), reactions[r][lectureReaction + 2] == 1);
+        importationR.setPH(reactions[r][lectureReaction].toDouble(), reactions[r][lectureReaction + 1].toDouble());
         importation->addReaction(importationR);
     }
     close();
