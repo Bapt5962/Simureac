@@ -180,7 +180,7 @@ void DialogEditionReaction::on_pH_clicked()
 {
     if(!ui->pH->isChecked())
     {
-        ui->pHA->setValue(-1);
+        ui->pHA->setValue(1);
         ui->pHB->setValue(-99);
     }
 }
