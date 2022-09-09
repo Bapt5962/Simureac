@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <QList>
-#include <QCryptographicHash>
 #include <QInputDialog>
 #include <QColorDialog>
 #include <QDesktopServices>
