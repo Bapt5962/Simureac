@@ -548,7 +548,7 @@ void Simulation::loop()
         QString envoi("");
         if(fpsAEnvoyer)
         {
-            envoi += QString::number(fpsActuel) + " FPS";
+            envoi += QString::number(fpsActuel) + " TPS";
         }
         if(!paused)
         {

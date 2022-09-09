@@ -41,7 +41,7 @@
             <x>0</x>
             <y>0</y>
             <width>479</width>
-            <height>517</height>
+            <height>509</height>
            </rect>
           </property>
          </widget>
@@ -127,7 +127,7 @@
             <x>0</x>
             <y>0</y>
             <width>253</width>
-            <height>303</height>
+            <height>273</height>
            </rect>
           </property>
          </widget>
@@ -188,7 +188,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFichier">
@@ -308,7 +308,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Compteur FPS</string>
+    <string>Compteur TPS</string>
    </property>
   </action>
   <action name="actionImporterParticule">
