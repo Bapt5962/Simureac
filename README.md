@@ -1,3 +1,6 @@
+Une copie du package Qt est disponible ici : https://superpenguinteam.com/qt/Package.zip
+L'actuel version officiel du logiciel est disponible ici : https://superpenguinteam.com/downloads/simureac/SimuReac.zip
+
 Simureac Source Code
     Copyright (C) 2022 Super Penguin Team
 
