@@ -30,6 +30,7 @@ int main(int argc, char *argv[])
         creer.write("Fond.B : 140");
         creer.write("Afficher FPS : Non");
         creer.write("Plein écran : Non");
+        creer.write("Déjà lancé : Non");
         creer.save("data/preferences.txt");
     }
     FileText pref("data/preferences.txt");

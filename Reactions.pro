@@ -27,6 +27,7 @@ SOURCES += \
     dialogeditionreaction.cpp \
     dialogimporterparticule.cpp \
     dialogparticules.cpp \
+    dialogpriseenmain.cpp \
     dialogreactions.cpp \
     dialogremplissage.cpp \
     dialogsauvegardeparticule.cpp \
@@ -63,6 +64,7 @@ HEADERS += \
     dialogeditionreaction.h \
     dialogimporterparticule.h \
     dialogparticules.h \
+    dialogpriseenmain.h \
     dialogreactions.h \
     dialogremplissage.h \
     dialogsauvegardeparticule.h \
@@ -95,6 +97,7 @@ FORMS += \
     dialogeditionreaction.ui \
     dialogimporterparticule.ui \
     dialogparticules.ui \
+    dialogpriseenmain.ui \
     dialogreactions.ui \
     dialogremplissage.ui \
     dialogsauvegardeparticule.ui \

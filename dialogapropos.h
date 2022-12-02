@@ -5,6 +5,13 @@
 #include <QDesktopServices>
 #include <QUrl>
 
+/*
+ * [Dialog A Propos]
+ *
+ * Fenêtre à propos
+ *
+ */
+
 namespace Ui {
 class DialogAPropos;
 }

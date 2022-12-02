@@ -73,6 +73,8 @@ Ordinateur::Ordinateur(QWidget *parent) :
 
     dernierePositionCurseur = QPoint(0, 0);
     curseurFixe = 0;
+
+    nouvelleColonneCSV("");
     QTimer::singleShot(100, this, SLOT(toolTipLoop()));
 }
 
@@ -127,12 +129,14 @@ void Ordinateur::loop(double temps, double x, double yG, double yD)
                 maxYD = yD;
             }
         }
+        ajouterAuCSV(QString::number(x), 'X');
         if(grandeurYG != 0)
         {
             graphiques[0].last().append(QPointF(x, yG));
             ajouterPointsCoordonnees.append(QPointF(x, yG));
             ajouterPointsAxe.append(true);
             ajouterPointsCouleursID.append(idCouleur[0]);
+            ajouterAuCSV(QString::number(yG), 'G');
         }
         if(grandeurYD != 0)
         {
@@ -140,6 +144,7 @@ void Ordinateur::loop(double temps, double x, double yG, double yD)
             ajouterPointsCoordonnees.append(QPointF(x, yD));
             ajouterPointsAxe.append(false);
             ajouterPointsCouleursID.append(idCouleur[1]);
+            ajouterAuCSV(QString::number(yG), 'D');
         }
         while (tempsDernierPoint <= temps + ui->DeltaT->value()) {
             tempsDernierPoint += ui->DeltaT->value();
@@ -207,6 +212,8 @@ void Ordinateur::on_Reset_clicked()
     idCouleur[0] = -1;
     idCouleur[1] = -1;
     ui->Donnees->setEnabled(true);
+    csv.clear();
+    nouvelleColonneCSV("");
 }
 
 void Ordinateur::on_Assimiler_clicked()
@@ -222,6 +229,7 @@ void Ordinateur::on_Assimiler_clicked()
         ui->Reset->setEnabled(true);
         ui->Assimilation->setEnabled(true);
         ui->MinMax->setEnabled(true);
+        ui->Export->setEnabled(true);
     }
     else
     {
@@ -231,6 +239,7 @@ void Ordinateur::on_Assimiler_clicked()
         ui->Donnees->setDisabled(true);
         ui->Reset->setDisabled(true);
         ui->MinMax->setDisabled(true);
+        ui->Export->setDisabled(true);
         graphiques[0].append(QList<QPointF>());
         graphiques[1].append(QList<QPointF>());
         if(grandeurYG != 0 && grandeurYD != 0)
@@ -265,6 +274,15 @@ void Ordinateur::on_Assimiler_clicked()
                 }
             }
         }
+        nouvelleColonneCSV(affichage[grandeurX]);
+        if(grandeurYG != 0)
+        {
+            nouvelleColonneCSV(affichage[grandeurYG]);
+        }
+        if(grandeurYD != 0)
+        {
+            nouvelleColonneCSV(affichage[grandeurYD]);
+        }
     }
     emit assimiliationClic(enAssimilation);
 }
@@ -290,6 +308,53 @@ void Ordinateur::on_MinMax_clicked()
     limitesAffiche = true;
 }
 
+void Ordinateur::on_Export_clicked()
+{
+    QString separateur, pointDecimal;
+    QStringList s, p;
+    s.append("Tabulation");
+    s.append("Virgule");
+    if(QInputDialog::getItem(this, "Séparateur", "Quel séparateur de données ?", s, 0, false) == "Tabulation")
+    {
+        separateur = "	";
+    }
+    else
+    {
+        separateur = ",";
+    }
+    p.append("Virgule");
+    p.append("Point");
+    if(QInputDialog::getItem(this, "Point décimal", "Quel point décimal ?", p, 0, false) == "Virgule")
+    {
+        pointDecimal = ",";
+    }
+    else
+    {
+        pointDecimal = ".";
+    }
+    FileText exportation;
+    for (int l(0); l < csv[0].size(); l++) {
+        QString ligne("");
+        for (int v(0); v < csv.size(); v++) {
+            if(csv[v][l].isNull())
+            {
+                ligne.append("");
+            }
+            else
+            {
+                ligne.append(csv[v][l].replace('.', pointDecimal));
+            }
+            if(v + 1 < csv.size())
+            {
+                ligne.append(separateur);
+            }
+        }
+        exportation.write(ligne);
+    }
+    QString fichier(QFileDialog::getSaveFileName(this, "Exporter en .csv", QString(), "csv *.csv"));
+    exportation.save(fichier);
+}
+
 void Ordinateur::changementMinMax()
 {
     if(limites->getManuel())
@@ -307,6 +372,7 @@ void Ordinateur::changementMinMax()
     {
         echelleContrainteMin = false;
         echelleContrainteMax = false;
+
     }
     limites->hide();
     limitesAffiche = false;
@@ -392,4 +458,40 @@ void Ordinateur::paintEvent(QPaintEvent *event)
     dessin.drawText(216, 19, affichage[grandeurYG]);
     dessin.drawText(612 - 6 * affichage[grandeurYD].size(), 19, affichage[grandeurYD]);
     dessin.drawText(216, 404, affichage[grandeurX]);
+}
+
+void Ordinateur::nouvelleColonneCSV(const QString &titre)
+{
+    csv.append(QStringList());
+    csv.last().append(titre);
+}
+
+void Ordinateur::ajouterAuCSV(const QString &valeur, char grandeur)
+{
+    switch (grandeur) {
+    case 'X':
+        ajouterAuCSV(valeur, csv.size() - (3 - (grandeurYG == 0 || grandeurYD == 0)));
+        break;
+    case 'G':
+        ajouterAuCSV(valeur, csv.size() - (2 - (grandeurYD == 0)));
+        break;
+    case 'D':
+        ajouterAuCSV(valeur, csv.size() - 1);
+        break;
+    }
+}
+
+void Ordinateur::ajouterAuCSV(const QString &valeur, int colonne, int ligne)
+{
+    if(ligne == -1)
+    {
+        ligne = csv[colonne].size();
+    }
+    while (csv[colonne].size() <= ligne) {
+        csv[colonne].append(QString());
+    }
+    while (csv[0].size() < csv[colonne].size()) {
+        csv[0].append(QString::number(csv[0].size()));
+    }
+    csv[colonne][ligne] = valeur;
 }

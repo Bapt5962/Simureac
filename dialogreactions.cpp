@@ -60,6 +60,7 @@ void DialogReactions::boutonClic(int ID)
     dialogEdition = new DialogEditionReaction(copie, generalCopie->getParticules(), this);
     connect(dialogEdition, SIGNAL(sauvegarder(DonneeReaction)), this, SLOT(donneeReactionRecu(DonneeReaction)));
     dialogEdition->setModal(true);
+    dialogEdition->setWindowModality(Qt::WindowModal);
     dialogEdition->show();
 }
 

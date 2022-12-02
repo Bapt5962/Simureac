@@ -18,6 +18,7 @@
 #include "dialogchargersimulation.h"
 #include "dialogaide.h"
 #include "dialogapropos.h"
+#include "dialogpriseenmain.h"
 
 #include <QDebug>
 
@@ -69,6 +70,7 @@ public slots:
     void on_actionPleinEcran_triggered(bool checked);
     //Aide
     void on_actionAide_triggered();
+    void on_actionPriseEnMain_triggered();
     void on_actionAPropos_triggered();
     void on_actionDonnations_triggered();
     //Dialog sans retour à MainWindow
@@ -113,6 +115,7 @@ private:
     DialogChargerSimulation *dialogChargerSimulation;
 
     DialogAide *dialogAide;
+    DialogPriseEnMain *dialogPriseEnMain;
     DialogAPropos *dialogAPropos;
 };
 #endif // MAINWINDOW_H

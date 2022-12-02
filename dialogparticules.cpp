@@ -55,6 +55,7 @@ void DialogParticules::boutonClic(int ID)
     dialogEdition = new DialogEditionParticule(copie, this);
     connect(dialogEdition, SIGNAL(sauvegarder(DonneeParticule)), this, SLOT(donneeParticuleRecu(DonneeParticule)));
     dialogEdition->setModal(true);
+    dialogEdition->setWindowModality(Qt::WindowModal);
     dialogEdition->show();
 }
 

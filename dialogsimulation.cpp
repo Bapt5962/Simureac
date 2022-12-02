@@ -63,6 +63,7 @@ void DialogSimulation::on_Particules_clicked()
     dialogParticules = new DialogParticules(generalCopie->creerCopie(), this);
     connect(dialogParticules, SIGNAL(sauvegarder(General)), this, SLOT(donneeRecu(General)));
     dialogParticules->setModal(true);
+    dialogParticules->setWindowModality(Qt::WindowModal);
     dialogParticules->show();
 }
 
@@ -71,6 +72,7 @@ void DialogSimulation::on_Interactions_clicked()
     dialogReactions = new DialogReactions(generalCopie->creerCopie(), this);
     connect(dialogReactions, SIGNAL(sauvegarder(General)), this, SLOT(donneeRecu(General)));
     dialogReactions->setModal(true);
+    dialogReactions->setWindowModality(Qt::WindowModal);
     dialogReactions->show();
 }
 

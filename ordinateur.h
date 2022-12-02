@@ -10,6 +10,9 @@
 #include <QToolTip>
 #include <QCursor>
 #include <QTimer>
+#include "filetext.h"
+#include <QFileDialog>
+#include <QInputDialog>
 
 /*
  * [Ordinateur]
@@ -62,6 +65,7 @@ public slots:
     void on_OrdonneeG_clicked();
     void on_OrdonneeD_clicked();
     void on_MinMax_clicked();
+    void on_Export_clicked();
     void changementMinMax();
     void toolTipLoop();
 
@@ -106,6 +110,11 @@ private:
     QList<int> ajouterPointsCouleursID; //"Pointe" vers ajouterPointsCouleurs
     QList<QString> ajouterPointsCouleurs; //Constante, générée dans le constructeur
     int idCouleur[2];
+
+    void nouvelleColonneCSV(const QString &titre);
+    void ajouterAuCSV(const QString &valeur, char grandeur); //Grandeur : X, G ou D
+    void ajouterAuCSV(const QString &valeur, int colonne, int ligne = -1); //Colonne 0 = N°, ne pas utiliser ! ; Ligne -1 = Fin
+    QList<QStringList> csv;
 };
 
 #endif // ORDINATEUR_H

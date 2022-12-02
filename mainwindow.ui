@@ -197,6 +197,7 @@
     </property>
     <addaction name="actionChargerSimulation"/>
     <addaction name="actionSauvegarderSimulation"/>
+    <addaction name="separator"/>
     <addaction name="actionImporterParticule"/>
     <addaction name="actionSauvegarderParticule"/>
    </widget>
@@ -232,6 +233,8 @@
      <string>Aide</string>
     </property>
     <addaction name="actionAide"/>
+    <addaction name="actionPriseEnMain"/>
+    <addaction name="separator"/>
     <addaction name="actionAPropos"/>
     <addaction name="actionDonnations"/>
    </widget>
@@ -313,7 +316,7 @@
   </action>
   <action name="actionImporterParticule">
    <property name="text">
-    <string>Importer Particule</string>
+    <string>Importer Particules</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+I</string>
@@ -329,7 +332,7 @@
   </action>
   <action name="actionSauvegarderParticule">
    <property name="text">
-    <string>Sauvegarder Particule</string>
+    <string>Sauvegarder Particules</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+E</string>
@@ -383,6 +386,11 @@
   <action name="actionDonnations">
    <property name="text">
     <string>Donations</string>
+   </property>
+  </action>
+  <action name="actionPriseEnMain">
+   <property name="text">
+    <string>Prise en main</string>
    </property>
   </action>
  </widget>

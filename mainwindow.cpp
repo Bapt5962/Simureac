@@ -40,6 +40,12 @@ MainWindow::MainWindow(QWidget *parent)
         showFullScreen();
         simulation->setFixedSize(1700, 1000);
     }
+    if(preferences[6].endsWith("Non"))
+    {
+        on_actionPriseEnMain_triggered();
+        preferences.replace(6, "Déjà lancé : Oui");
+        preferences.save();
+    }
     simulation->setCouleurArrierePlan(QColor(preferences[1].split(' ')[2].toInt(), preferences[2].split(' ')[2].toInt(), preferences[3].split(' ')[2].toInt()));
 
     messageStatusBar = new QLabel("");
@@ -111,6 +117,7 @@ void MainWindow::on_actionImporterParticule_triggered()
     simulation->setPaused(true);
     dialogImporterParticule = new DialogImporterParticule(general, this);
     dialogImporterParticule->setModal(true);
+    dialogImporterParticule->setWindowModality(Qt::WindowModal);
     dialogImporterParticule->show();
     connect(dialogImporterParticule, SIGNAL(dialogQuit(int)), this, SLOT(dialogQuit(int)));
 }
@@ -120,6 +127,7 @@ void MainWindow::on_actionChargerSimulation_triggered()
     simulation->setPaused(true);
     dialogChargerSimulation = new DialogChargerSimulation(general, this);
     dialogChargerSimulation->setModal(true);
+    dialogChargerSimulation->setWindowModality(Qt::WindowModal);
     dialogChargerSimulation->show();
     connect(dialogChargerSimulation, SIGNAL(dialogQuit(int, General*)), this, SLOT(dialogQuit(int, General*)));
 }
@@ -133,6 +141,7 @@ void MainWindow::on_actionSauvegarderParticule_triggered()
     simulation->setPaused(true);
     dialogSauvegardeParticule = new DialogSauvegardeParticule(general, this);
     dialogSauvegardeParticule->setModal(true);
+    dialogSauvegardeParticule->setWindowModality(Qt::WindowModal);
     dialogSauvegardeParticule->show();
     connect(dialogSauvegardeParticule, SIGNAL(dialogQuit(int)), this, SLOT(dialogQuit(int)));
 }
@@ -142,6 +151,7 @@ void MainWindow::on_actionSauvegarderSimulation_triggered()
     simulation->setPaused(true);
     dialogSauvegardeSimulation = new DialogSauvegardeSimulation(general, this);
     dialogSauvegardeSimulation->setModal(true);
+    dialogSauvegardeSimulation->setWindowModality(Qt::WindowModal);
     dialogSauvegardeSimulation->show();
     connect(dialogSauvegardeSimulation, SIGNAL(dialogQuit(int)), this, SLOT(dialogQuit(int)));
 }
@@ -154,6 +164,7 @@ void MainWindow::on_actionEditer_triggered()
     connect(dialogSimulation, SIGNAL(sauvegarder(General)), this, SLOT(donneeSimulationRecu(General)));
     connect(dialogSimulation, SIGNAL(annuler()), this, SLOT(donneeSimulationAnnuler()));
     dialogSimulation->setModal(true);
+    dialogSimulation->setWindowModality(Qt::WindowModal);
     dialogSimulation->show();
 }
 
@@ -270,7 +281,14 @@ void MainWindow::on_actionAide_triggered()
     dialogAide = new DialogAide(this);
     connect(dialogAide, SIGNAL(dialogQuit(int)), this, SLOT(dialogQuit(int)));
     dialogAide->setModal(true);
+    dialogAide->setWindowModality(Qt::WindowModal);
     dialogAide->show();
+}
+
+void MainWindow::on_actionPriseEnMain_triggered()
+{
+    dialogPriseEnMain = new DialogPriseEnMain;
+    dialogPriseEnMain->show();
 }
 
 void MainWindow::on_actionAPropos_triggered()
@@ -279,6 +297,7 @@ void MainWindow::on_actionAPropos_triggered()
     dialogAPropos = new DialogAPropos(this);
     connect(dialogAPropos, SIGNAL(dialogQuit(int)), this, SLOT(dialogQuit(int)));
     dialogAPropos->setModal(true);
+    dialogAPropos->setWindowModality(Qt::WindowModal);
     dialogAPropos->show();
 }
 
@@ -335,6 +354,7 @@ void MainWindow::on_Burette_clicked()
     connect(dialogRemplissage, SIGNAL(remplir(Remplissage)), simulation, SLOT(donneeRemplissageRecu(Remplissage)));
     connect(dialogRemplissage, SIGNAL(annuler()), simulation, SLOT(donneeAnnuler()));
     dialogRemplissage->setModal(true);
+    dialogRemplissage->setWindowModality(Qt::WindowModal);
     dialogRemplissage->show();
 }
 
@@ -345,6 +365,7 @@ void MainWindow::on_Becher_clicked()
     connect(dialogRemplissage, SIGNAL(remplir(Remplissage)), simulation, SLOT(donneeRemplissageRecu(Remplissage)));
     connect(dialogRemplissage, SIGNAL(annuler()), simulation, SLOT(donneeAnnuler()));
     dialogRemplissage->setModal(true);
+    dialogRemplissage->setWindowModality(Qt::WindowModal);
     dialogRemplissage->show();
 }
 

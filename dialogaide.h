@@ -8,6 +8,13 @@
 #include <QListWidgetItem>
 #include "filetext.h"
 
+/*
+ * [Dialog Aide]
+ *
+ * Fenêtre d'aide
+ *
+ */
+
 namespace Ui {
 class DialogAide;
 }
