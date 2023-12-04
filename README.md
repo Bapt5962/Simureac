@@ -1,4 +1,5 @@
 Edit du 04/12/2023 : Oh mon dieu, comment j'ai fait pour finir ce projet avec un code aussi mal organisé. (J'étais en terminale au lycée à ce moment là pour info même si ça change rien à l'horreur)
+
 Edit of 04/12/2023 : Oh my god, how did I manage to finish this project with this terribly disorganised code. (Just so you know, I was in my last year of high school at this time, it doesn't change the fact that it's terrible thought)
 
 Une copie du package Qt est disponible ici : https://superpenguinteam.com/qt/Package.zip
